@@ -89,4 +89,18 @@ document.addEventListener('DOMContentLoaded', () => {
   if (copyrightYear) {
     copyrightYear.textContent = new Date().getFullYear();
   }
+
+  // Email obfuscation protection
+  const emailLink = document.getElementById('email-link');
+  if (emailLink) {
+    const user = emailLink.getAttribute('data-user');
+    const domain = emailLink.getAttribute('data-domain');
+    if (user && domain) {
+      const email = user + '@' + domain;
+      emailLink.href = 'mailto:' + email;
+      emailLink.textContent = email;
+      emailLink.removeAttribute('data-user');
+      emailLink.removeAttribute('data-domain');
+    }
+  }
 });
